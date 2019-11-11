@@ -1,0 +1,2 @@
+class PaddersController < ApplicationController
+end

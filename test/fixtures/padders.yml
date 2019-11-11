@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  password: MyString
+  bio: MyString
+  languages: MyString
+  zodiac: MyString
+  location: one
+  countries_visited: MyString
+  room_available: 
+
+two:
+  username: MyString
+  password: MyString
+  bio: MyString
+  languages: MyString
+  zodiac: MyString
+  location: two
+  countries_visited: MyString
+  room_available: 
