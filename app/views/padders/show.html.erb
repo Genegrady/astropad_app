@@ -1,0 +1,13 @@
+<h1><%= @padder.username %>'s Profile</h1>
+
+<p><%= @padder.bio %></p>
+<br>
+<p><%= @padder.languages %></p>
+<br>
+<p><%= @padder.zodiac %></p>
+<br>
+<p><%= @padder.location %></p>
+<br>
+<p><%= @padder.countries_visited %></p>
+
+<%= button_to "Update Profile", edit_padder_path, method: :post %>
