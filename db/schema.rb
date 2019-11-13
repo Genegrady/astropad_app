@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_11_11_202531) do
   create_table "locations", force: :cascade do |t|
     t.string "city"
     t.string "country"
+    t.string "languages"
     t.integer "padder_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -25,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_11_11_202531) do
 
   create_table "padders", force: :cascade do |t|
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
     t.string "bio"
     t.string "languages"
     t.string "zodiac"

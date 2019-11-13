@@ -1,13 +1,19 @@
-<h1><%= @padder.username %>'s Profile</h1>
+<h1>User Dashboard</h1>
 
+<h1><%= @padder.username %>'s Profile</h1>
+<h2>Bio:</h2>
 <p><%= @padder.bio %></p>
 <br>
+<h2>Languages Spoken:</h2>
 <p><%= @padder.languages %></p>
 <br>
+<h2>Yo Zodiac:</h2>
 <p><%= @padder.zodiac %></p>
 <br>
-<p><%= @padder.location %></p>
+<h2>Where you are located:</h2>
+<p><%= @padder.location.city %></p>
 <br>
+<h2>Where you been:</h2>
 <p><%= @padder.countries_visited %></p>
 
-<%= button_to "Update Profile", edit_padder_path, method: :post %>
+<%= link_to "Update Profile", edit_padder_path(@padder)%>

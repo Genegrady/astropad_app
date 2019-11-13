@@ -1,0 +1,10 @@
+<h1>List of Locations</h1>
+
+<ul>
+    <% @locations.each do |location| %>
+<li>
+<strong><%= link_to location.country, location  %></strong>
+</li>
+
+    <% end %>
+</ul>

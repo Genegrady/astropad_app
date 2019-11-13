@@ -17,5 +17,5 @@ require 'restcountry'
 
 50.times do
 @country = @countries.sample
-    Location.create(city: @country.capital, country: @country.name)
+    Location.create(city: @country.capital, country: @country.name, languages: @country.languages.find{|h| h['name']})
 end

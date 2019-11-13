@@ -1,0 +1,35 @@
+
+  <h1>Editing <%= @padder.username %>'s Profile</h1>
+  
+  <%= form_for @padder do |f| %>
+  <div>
+    <%= f.label :username %>
+    <%= f.text_field :username, autofocus: true %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+  <%= f.collection_select :location_id, Location.all, :id, :country %>
+  </div>
+  <div>
+     <%= f.label :bio %>
+     <%=f.text_area :bio %>   
+  </div>
+  <div>
+     <%= f.label :zodiac %>
+     <%=f.text_field :zodiac %>   
+  </div>
+  <div>
+     <%= f.label :countries_visited %>
+     <%= f.collection_select :countries_visited, Location.all, :country, :country,{}, {:multiple => true} %>  
+  </div>
+  <div>
+    <%= f.label :room_available %>
+    <%= f.check_box :room_available %>
+  </div>
+  <div>
+    <%= f.submit "Update Profile!" %>
+  </div>
+<% end %>

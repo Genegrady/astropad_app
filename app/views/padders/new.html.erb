@@ -1,0 +1,20 @@
+<h1>Sign Up</h1>
+
+<%= form_for @padder do |f| %>
+  <div>
+    <%= f.label :username %>
+    <%= f.text_field :username, autofocus: true %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+  <%= f.collection_select :location_id, Location.all, :id, :country %>
+  </div>
+  <div>
+    <%= f.submit "Sign up!" %>
+  </div>
+<% end %>
+
+<%= button_to "Or Login", login_path, method: "get" %>

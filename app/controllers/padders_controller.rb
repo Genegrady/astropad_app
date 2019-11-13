@@ -9,17 +9,20 @@ class PaddersController < ApplicationController
 
     def new
         @padder = Padder.new
-        @errors = flash[:errors]
     end
 
     def create
-        @padder= Padder.create(strong_params(:username, :password, :bio, :languages, :zodiac, :location_id, :countries_visited, :room_available))
+    # byebug
+        @padder = Padder.new(strong_params(:username, :password, :location_id))
 
-        if @padder.valid?
+        @padder.username.downcase!
+
+        if  @padder.save
+            flash[:notice] = "Account Created!"
             redirect_to @padder
-        else
-            flash[:errors]= @padder.errors.full_messages
-            redirect_to new_padder_path
+         else
+            flash[:notice] = "Username Taken Try again!"
+            redirect_to signup_path
         end
     end
 
@@ -28,9 +31,15 @@ class PaddersController < ApplicationController
     end
 
     def update
-        Padder.update(strong_params(:username, :password, :bio, :languages, :zodiac, :location_id, :countries_visited, :room_available))
+        byebug
 
-        if @padder.valid?
+        params[:padder][:countries_visited] = params[:padder][:countries_visited].join(",")
+        
+        @padder.update(strong_params(:username, :password, :bio, :languages, :zodiac, :location_id, :countries_visited, :room_available))
+
+
+
+        if @padder.save
             redirect_to @padder
         else
             flash[:errors]= @padder.errors.full_messages
