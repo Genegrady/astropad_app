@@ -1,3 +1,16 @@
 // Place all the styles related to the padders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+main {
+    display:flex
+}
+header {
+    box-sizing: border-box;
+    color: white;
+}
+
+section {
+    text-align: center;
+    // color: white;
+    text-shadow: 4rem;
+}

@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   get "/signups", to: "padders#new", as: "signup"
   post "/signups", to: "padders#create"
   get "/login", to: "sessions#new", as: "login"
-  post "sessions", to: "sessions#create", as: "sessions"
+  post "login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy", as: "logout"
+  patch "/accept/:id", to: "requests#accept"
+  patch "/decline/:id", to: "requests#decline"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

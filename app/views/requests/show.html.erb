@@ -1,0 +1,13 @@
+
+
+<h1><%= @current_padder.username %>'s Pending Requests</h1>
+<div>
+
+
+<% @current_padder.requestees.each do |requestee| %>
+    <%= link_to requestee.username, requestee %>
+<% end %>
+
+<%= button_to "Accept Request", "/accept/:id", method: :patch %>
+<%= button_to "Decline Request", "/decline/:id", method: :patch %>
+</div>

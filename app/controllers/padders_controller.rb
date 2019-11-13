@@ -1,4 +1,5 @@
 class PaddersController < ApplicationController
+    skip_before_action :authorized, only: [:new, :create]
     before_action :set_padder, only: [:show, :edit, :update, :delete]
     def index
         @padders = Padder.all
@@ -31,9 +32,12 @@ class PaddersController < ApplicationController
     end
 
     def update
-        byebug
 
-        params[:padder][:countries_visited] = params[:padder][:countries_visited].join(",")
+        params[:padder][:countries_visited] = params[:padder][:countries_visited].join(", ")
+
+        if params[:padder][:countries_visited].to_s.chars.first == ","
+        then params[:padder][:countries_visited] = params[:padder][:countries_visited][1..-1]
+        end
         
         @padder.update(strong_params(:username, :password, :bio, :languages, :zodiac, :location_id, :countries_visited, :room_available))
 

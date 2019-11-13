@@ -1,8 +1,13 @@
-<%= form_for @requests do |f| %>
-  <div>
-  <%= f.collection_select :requestee_padder_id, Padder.all, :id, :username %>
-  </div>
-  <div>
-    <%= f.submit "Send Room Request" %>
-  </div>
+
+
+
+<%= form_for @request do |f| %>
+<%= f.label :dates %> 
+<%= f.text_field :dates %> 
+<%= f.label :content %>
+<%= f.text_area :content %>
+<%= f.hidden_field :requestee_padder_id, :value => :requestee_padder_id%>
+<%= f.hidden_field :requester_padder_id, :value => @current_padder.id %>
+<%= f.submit %>
 <% end %>
+  

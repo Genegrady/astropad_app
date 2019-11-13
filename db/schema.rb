@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(version: 2019_11_11_202531) do
   create_table "requests", force: :cascade do |t|
     t.integer "requestee_padder_id"
     t.integer "requester_padder_id"
+    t.boolean "request_status"
+    t.string "dates"
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -23,7 +23,7 @@
   </div>
   <div>
      <%= f.label :countries_visited %>
-     <%= f.collection_select :countries_visited, Location.all, :country, :country,{}, {:multiple => true} %>  
+     <%= f.collection_select :countries_visited, Location.order("country ASC"), :country, :country,{}, {:multiple => true} %>  
   </div>
   <div>
     <%= f.label :room_available %>
