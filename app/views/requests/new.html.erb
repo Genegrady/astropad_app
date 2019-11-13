@@ -1,0 +1,8 @@
+<%= form_for @requests do |f| %>
+  <div>
+  <%= f.collection_select :requestee_padder_id, Padder.all, :id, :username %>
+  </div>
+  <div>
+    <%= f.submit "Send Room Request" %>
+  </div>
+<% end %>
