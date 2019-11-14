@@ -1,0 +1,13 @@
+
+
+
+<%= form_for new_padder_request_path do |f| %>
+<%= f.label :dates %> 
+<%= f.text_field :dates %> 
+<%= f.label :content %>
+<%= f.text_area :content %>
+<%= f.hidden_field :requestee_padder_id, :value => params[:padder_id]%>
+<%= f.hidden_field :requester_padder_id, :value => @current_padder.id %>
+<%= f.submit "Submit Request" %>
+<% end %>
+  

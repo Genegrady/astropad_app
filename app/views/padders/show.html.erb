@@ -1,5 +1,8 @@
+<header>
 <h1>User Dashboard</h1>
+</header>
 
+<section>
 <h1><%= @padder.username %>'s Profile</h1>
 <h2>Bio:</h2>
 <p><%= @padder.bio %></p>
@@ -15,5 +18,63 @@
 <br>
 <h2>Where you been:</h2>
 <p><%= @padder.countries_visited %></p>
+</section>
 
-<%= link_to "Update Profile", edit_padder_path(@padder)%>
+<% if @padder.id != @current_padder.id && @padder.room_available != false  %>
+   
+    <td><%= link_to "Request Room", 
+    "/padders/#{@padder.id}/requests/new" %> </td>
+<% end %>
+
+
+<section>
+<h2>Locations With Rooms Available</h2>
+
+
+<% Location.all.each do |location| %>
+<% location.padders.each do |padder| %>
+        <% if padder.room_available != false && padder.id != @current_padder.id %>
+        <%=link_to location.country, location%>
+        <% end %>
+    <% end %>
+<% end %>
+</section>
+
+<section>
+<h1><%= "All Requests Sent" %></h1>
+<ol>
+
+     
+     <% Request.all.each do |request| %>
+      
+ <% if @current_padder.id == request.requester_padder_id %>
+      
+         <%= link_to request.requestee_padder_id, padder_request_path(:padder_id) %>
+         byebug
+     <% end %>
+<% end %>
+ 
+ 
+
+<section>
+<h1><%= "Pending Requests Received" %></h1>
+<ol>
+ <%Request.all.each do |request| %>
+      <% if @current_padder.id == request.requestee_padder_id %>
+        <p>Request #<%=  request  %></p> 
+     <% end %>
+<% end %>
+</ol>
+</section>
+
+<section> <h1><%= "Accepted Requests" %> </h1>
+
+<ol>
+ <%Request.all.each do |request| %>
+      <% if @current_padder.id == request.requestee_padder_id && request.request_status == true %>
+         <%=  request  %>
+     <% end %>
+<% end %>
+</ol>
+</section>
+
