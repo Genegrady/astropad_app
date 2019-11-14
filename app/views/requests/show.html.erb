@@ -1,13 +1,13 @@
-
-
 <h1><%= @current_padder.username %>'s Pending Requests</h1>
 <div>
 
-
-<% @current_padder.requestees.each do |requestee| %>
-    <%= link_to requestee.username, requestee %>
-<% end %>
-
+<div>
+<%= @request.dates %>
+</div>
+<div>
+<%= @request.content %>
+<main>
 <%= button_to "Accept Request", "/accept/:id", method: :patch %>
 <%= button_to "Decline Request", "/decline/:id", method: :patch %>
-</div>
+<%= button_to "Cancel Request", "/requests/:id", method: :delete %>
+</main>

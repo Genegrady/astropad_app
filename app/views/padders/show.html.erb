@@ -22,8 +22,8 @@
 
 <% if @padder.id != @current_padder.id && @padder.room_available != false  %>
    
-    <td><%= button_to "Request Room", 
-    new_request_path(@padder), method: :get %> </td>
+    <td><%= link_to "Request Room", 
+    "/padders/#{@padder.id}/requests/new" %> </td>
 <% end %>
 
 
@@ -41,15 +41,40 @@
 </section>
 
 <section>
-<h1><%= "Manage Requests" %></h1>
+<h1><%= "All Requests Sent" %></h1>
 <ol>
-    
-    <% @current_padder.requesters.each do |requester| %>
-        byebug
-        <%= requester %>
-    <% end %>
-    
 
+     
+     <% Request.all.each do |request| %>
+      
+ <% if @current_padder.id == request.requester_padder_id %>
+      
+         <%= link_to request.requestee_padder_id, padder_request_path(:padder_id) %>
+         byebug
+     <% end %>
+<% end %>
+ 
+ 
+
+<section>
+<h1><%= "Pending Requests Received" %></h1>
+<ol>
+ <%Request.all.each do |request| %>
+      <% if @current_padder.id == request.requestee_padder_id %>
+        <p>Request #<%=  request  %></p> 
+     <% end %>
+<% end %>
+</ol>
+</section>
+
+<section> <h1><%= "Accepted Requests" %> </h1>
+
+<ol>
+ <%Request.all.each do |request| %>
+      <% if @current_padder.id == request.requestee_padder_id && request.request_status == true %>
+         <%=  request  %>
+     <% end %>
+<% end %>
 </ol>
 </section>
 

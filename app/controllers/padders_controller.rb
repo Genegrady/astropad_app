@@ -2,7 +2,11 @@ class PaddersController < ApplicationController
     skip_before_action :authorized, only: [:new, :create]
     before_action :set_padder, only: [:show, :edit, :update, :delete]
     def index
-        @padders = Padder.all
+       if params[:zodiac]
+        @padder = Padder.where('store LIKE ?', "%#{params[:zodiac]}%")
+        else
+         @padders = Padder.all
+        end
     end
 
     def show
