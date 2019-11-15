@@ -10,22 +10,21 @@
   </head>
 
   <body>
-    <header>
        <nav class="right">
           <span class="item">
             <% if @current_padder %>
-              Welcome, <%= @current_padder.username %>!
               <%= link_to "User Dashboard", @current_padder  %>
+              <%= link_to "Update Profile", edit_padder_path(@current_padder)%>
               <%= link_to "Logout", logout_path, method: :delete, class: "item" %>
-                  <%= link_to "Update Profile", edit_padder_path(@current_padder)%>
+              <%= link_to "Search By Zodiac", search_path %>
             <% else %>
               <%= link_to "Signup", signup_path, class: "item" %>
               <%= link_to "Login", login_path, class: "item" %>
             <% end %>
           </span>
         </nav>
-    </header>
     <%= yield %>
 
   </body>
 </html>
+<link 

@@ -1,24 +1,67 @@
 <header>
-<h1>User Dashboard</h1>
+User Dashboard
 </header>
 
+<aside class="profile-card">
+  <header>
+    <!-- here’s the avatar -->
+    <a target="_blank" href="#">
+      <img src="http://lorempixel.com/150/150/people/" class="hoverZoomLink">
+    </a>
+
+    <!-- the username -->
+    <h1>
+      <h1><%= @padder.username.upcase %>'s Profile</h1>
+          </h1>
+
+  </header>
+
+  <!-- bit of a bio; who are you? -->
+  <div class="profile-bio">
+
+    <p>
+    BIO: 
+    <%= @padder.bio %>
+    </p>
+
+  </div>
+
+<div class="languages">
+
+    <p>
+    LANGUAGES: 
+    <%= @padder.languages %>
+    </p>
+
+  </div>
+<div class="zodiac">
+
+    <p>
+    ZODIAC SIGN:
+    <%= @padder.zodiac %>
+    </p>
+
+  </div>
+<div class="located">
+
+    <p>
+    CITY:
+    <%= @padder.location.city %>
+    </p>
+
+  </div>
+<div class="countries-visited">
+
+    <p>
+    COUNTRIES VISITED:
+    <%= @padder.countries_visited %>
+    </p>
+
+  </div>
+
+
+
 <section>
-<h1><%= @padder.username %>'s Profile</h1>
-<h2>Bio:</h2>
-<p><%= @padder.bio %></p>
-<br>
-<h2>Languages Spoken:</h2>
-<p><%= @padder.languages %></p>
-<br>
-<h2>Yo Zodiac:</h2>
-<p><%= @padder.zodiac %></p>
-<br>
-<h2>Where you are located:</h2>
-<p><%= @padder.location.city %></p>
-<br>
-<h2>Where you been:</h2>
-<p><%= @padder.countries_visited %></p>
-</section>
 
 <% if @padder.id != @current_padder.id && @padder.room_available != false  %>
    
@@ -26,10 +69,9 @@
     "/padders/#{@padder.id}/requests/new" %> </td>
 <% end %>
 
+<h1>Locations With Rooms Available</h1>
 
-<section>
-<h2>Locations With Rooms Available</h2>
-
+<p>
 
 <% Location.all.each do |location| %>
 <% location.padders.each do |padder| %>
@@ -40,41 +82,44 @@
 <% end %>
 </section>
 
+</p>
 <section>
-<h1><%= "All Requests Sent" %></h1>
-<ol>
-
-     
-     <% Request.all.each do |request| %>
-      
- <% if @current_padder.id == request.requester_padder_id %>
-      
-         <%= link_to request.requestee_padder_id, padder_request_path(:padder_id) %>
-         byebug
-     <% end %>
-<% end %>
- 
- 
-
-<section>
-<h1><%= "Pending Requests Received" %></h1>
+<h2><%= "Pending Requests Received" %></h2>
 <ol>
  <%Request.all.each do |request| %>
-      <% if @current_padder.id == request.requestee_padder_id %>
-        <p>Request #<%=  request  %></p> 
+      <% if @current_padder.id == request.requestee_padder_id &&@current_padder.id != request.requester_padder_id%>
+       <%= link_to request.requestee_padder_id, padder_request_path(:padder_id) %></p>
+       <% elsif  request.requestee_padder_id == nil%>
+       <%= "No Requests For You" %>
      <% end %>
 <% end %>
 </ol>
 </section>
 
-<section> <h1><%= "Accepted Requests" %> </h1>
+<p>
+
+<section> <h2><%= "Accepted Requests" %> </h2>
 
 <ol>
  <%Request.all.each do |request| %>
       <% if @current_padder.id == request.requestee_padder_id && request.request_status == true %>
-         <%=  request  %>
+         <%=  request.requestee_padder_id  %>
      <% end %>
 <% end %>
 </ol>
 </section>
 
+</p>
+
+<p>
+<section> <h2><%= "Declined Requests" %> </h2>
+
+<ol>
+ <%Request.all.each do |request| %>
+      <% if @current_padder.id == request.requestee_padder_id && request.request_status == false %>
+         <%=  request.requestee_padder_id  %>
+     <% end %>
+<% end %>
+</p>
+</ol>
+</section>

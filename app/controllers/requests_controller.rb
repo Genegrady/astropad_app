@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-before_action :current_request, only:[:edit, :update, :delete, :accept, :decline]
+before_action :current_request, only:[:edit, :update, :delete, :accept, :decline, :show]
     def new
         
         @request = Request.new
@@ -8,14 +8,13 @@ before_action :current_request, only:[:edit, :update, :delete, :accept, :decline
 
     def create
         @request =
-       byebug
         Request.create(requestee_padder_id: params["/padders/#{params[:padder_id]}/requests/new"][:requestee_padder_id],requester_padder_id: params["/padders/#{params[:padder_id]}/requests/new"][:requester_padder_id],dates: params["/padders/#{params[:padder_id]}/requests/new"][:dates], content: params["/padders/#{params[:padder_id]}/requests/new"][:content])
         flash[:notice]= "You Accepted This Request"
         redirect_to @current_padder
     end
 
     def show
-        @request = Request.find(params[:id])
+       
     end
 
     def edit
@@ -31,13 +30,13 @@ before_action :current_request, only:[:edit, :update, :delete, :accept, :decline
     def decline
         
         # @request.update(request_status: params["/padders/:id/requests/:id"][:request_status])
-        @request.update(request_status: true)
+        @request.update(request_status: false)
         flash[:notice] = "You declined this request!"
 
         redirect_to @current_padder
     end
 
-    def destroy
+    def delete
         @request.destroy
 
         redirect_to @current_padder

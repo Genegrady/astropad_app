@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :locations, only: [:index, :show]
   
   
-
+  get "/search", to: "padders#index", as: "search"
   get "/signups", to: "padders#new", as: "signup"
   post "/signups", to: "padders#create"
   get "/login", to: "sessions#new", as: "login"
@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   post "/padders/:padder_id/requests/new", to: "requests#create"
   get "/padders/:padder_id/requests/:id", to: "requests#show"
   delete "/requests/:id", to: "requests#delete"
+  get "/padders", to: "padders#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

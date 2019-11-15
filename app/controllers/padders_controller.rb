@@ -1,9 +1,10 @@
 class PaddersController < ApplicationController
-    skip_before_action :authorized, only: [:new, :create]
+    skip_before_action :authorized, only: [:new, :create, :index]
     before_action :set_padder, only: [:show, :edit, :update, :delete]
     def index
-       if params[:zodiac]
-        @padder = Padder.where('store LIKE ?', "%#{params[:zodiac]}%")
+        byebug
+        if params[:zodiac] != ''
+            @padder = Padder.where(zodiac: params[:zodiac])
         else
          @padders = Padder.all
         end
@@ -63,8 +64,14 @@ class PaddersController < ApplicationController
     private
 
     def strong_params(*args)
+    # byebug
         params.require(:padder).permit(*args)
     end
+
+    # def zodiac_params
+    # # byebug
+    #     params.require(:padders).permit(:zodiac)
+    # end
 
     def set_padder
         @padder = Padder.find(params[:id])
