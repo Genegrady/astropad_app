@@ -1,7 +1,13 @@
 class PaddersController < ApplicationController
+    skip_before_action :authorized, only: [:new, :create, :index]
     before_action :set_padder, only: [:show, :edit, :update, :delete]
     def index
-        @padders = Padder.all
+        byebug
+        if params[:zodiac] != ''
+            @padder = Padder.where(zodiac: params[:zodiac])
+        else
+         @padders = Padder.all
+        end
     end
 
     def show
@@ -31,9 +37,12 @@ class PaddersController < ApplicationController
     end
 
     def update
-        byebug
 
-        params[:padder][:countries_visited] = params[:padder][:countries_visited].join(",")
+        params[:padder][:countries_visited] = params[:padder][:countries_visited].join(", ")
+
+        if params[:padder][:countries_visited].to_s.chars.first == ","
+        then params[:padder][:countries_visited] = params[:padder][:countries_visited][1..-1]
+        end
         
         @padder.update(strong_params(:username, :password, :bio, :languages, :zodiac, :location_id, :countries_visited, :room_available))
 
@@ -55,8 +64,14 @@ class PaddersController < ApplicationController
     private
 
     def strong_params(*args)
+    # byebug
         params.require(:padder).permit(*args)
     end
+
+    # def zodiac_params
+    # # byebug
+    #     params.require(:padders).permit(:zodiac)
+    # end
 
     def set_padder
         @padder = Padder.find(params[:id])

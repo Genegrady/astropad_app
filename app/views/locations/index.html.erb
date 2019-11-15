@@ -1,10 +1,11 @@
 <h1>List of Locations</h1>
 
-<ul>
-    <% @locations.each do |location| %>
+<ol>
+    <% @locations.sort_by(&:country).each do |location| %>
 <li>
 <strong><%= link_to location.country, location  %></strong>
 </li>
 
     <% end %>
-</ul>
+</ol>
+

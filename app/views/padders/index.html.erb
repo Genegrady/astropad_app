@@ -1,2 +1,5 @@
-
-
+<h4> Search by Zodiac</h4>
+<%= form_tag(padders_path, method: :get) do %>
+<%= text_field_tag :zodiac, params[:zodiac] %>
+<%= submit_tag ‘Search’, name: nil %>
+<%end %>
